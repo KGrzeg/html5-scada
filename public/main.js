@@ -4,7 +4,6 @@ const app = new Vue({
   el: "#app",
   data: {
     connected: false,
-    connecting: false,
     messagesStack: [],
     controller: {
       set: {
@@ -20,6 +19,7 @@ const app = new Vue({
         Ti: 0,
       },
     },
+    socket: null,
   },
   computed: {
     status() {
@@ -37,18 +37,30 @@ const app = new Vue({
   methods: {
     connect() {
       if (!this.connected) {
-        //TODO ws connection
-        this.connecting = true;
-
-        setTimeout(() => {
-          this.connecting = false;
-          this.connected = true;
-          this.pushMessage("Connected");
-        }, 1000);
+        this.openConnection();
       } else {
         this.connected = !this.connected;
+        this.socket.disconnect();
+        this.socket = null;
         this.pushMessage("Disconnected");
       }
+    },
+    openConnection() {
+      this.socket = io();
+
+      this.socket.on("connect", () => {
+        this.connected = true;
+        this.pushMessage("Connected");
+      });
+
+      this.socket.on("disconnect", () => {
+        this.connected = false;
+        this.pushMessage("Disconnected");
+      });
+
+      this.socket.on("error", (err) => {
+        this.pushMessage(`Error occured: ${err}`);
+      });
     },
     submitU() {
       this.controller.set.u = parseFloat(this.controller.view.u);
@@ -64,11 +76,16 @@ const app = new Vue({
       this.messagesStack.push(text);
       setTimeout(() => {
         this.messagesStack = this.messagesStack.slice(1);
-        console.log("hehe");
       }, messageTime);
     },
     sendInputs() {
-      //send packet via ws
+      const inputs = [
+        this.controller.set.u,
+        this.controller.set.Kp,
+        this.controller.set.Ti,
+        this.controller.set.Ts,
+      ];
+      this.socket.emit("updateInputs", inputs);
     },
   },
 });
