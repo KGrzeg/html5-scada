@@ -24,24 +24,24 @@
       <div class="dummy">Live response placeholder</div>
     </div>
     <div class="controls">
-      <input type="button" :value="btnConnectTitle" @click="connectCb">
-      <input type="button" value="Update input">
-      <input type="button" value="Update PID terms">
+      <input type="button" :value="btnConnectTitle" @click="connect">
+      <input type="button" value="Update input" @click="submitU" :disabled="!this.connected">
+      <input type="button" value="Update PID terms" @click="submitPID" :disabled="!this.connected">
     </div>
     <h5>Set Inputs and terms</h5>
-    <div class="controls">
-      <label>u <input type="number" value="1"></label>
-    </div>
-    <div class="controls three">
-      <label>Kp <input type="number" value="1"></label><label>Ti <input type="number" value="1"></label><label>Ts <input
-          type="number" value="1"></label>
+    <div class="controls container">
+      <label>u <input type="number" value="0" v-model="controller.view.u"></label>
+      <label>Kp <input type="number" value="1" v-model="controller.view.Kp"></label>
+      <label>Ti <input type="number" value="1000" v-model="controller.view.Ti"></label>
+      <label>Ts <input type="number" value="1" v-model="controller.view.Ts"></label>
     </div>
     <h5>Current Values</h5>
-    <div class="controls three">
-      <label>Kp <input type="number" value="1" readonly></label><label>Ti <input type="number" value="1"
-          readonly></label><label>Ts <input type="number" value="1" readonly></label>
+    <div class="controls container">
+      <label>u <input type="number" value="0" v-model="controller.set.u" readonly disabled></label>
+      <label>Kp <input type="number" value="1" v-model="controller.set.Kp" readonly disabled></label>
+      <label>Ti <input type="number" value="1000" v-model="controller.set.Ti" readonly disabled></label>
+      <label>Ts <input type="number" value="1" v-model="controller.set.Ts" readonly disabled></label>
     </div>
-
   </div>
 
   <div class="footer">Autorzy: Grzegorz Kupczyk & Jarosław Bartkowski</div>

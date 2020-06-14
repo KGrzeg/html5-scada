@@ -38,7 +38,7 @@ h5 {
 
 .status {
   font-family: "Courier New", Courier, monospace;
-  margin-bottom: 1em;
+  margin: 0.5em 0;
 }
 
 .plot {
@@ -62,9 +62,13 @@ h5 {
   text-align: center;
 }
 
-.controls.three label {
-  display: inline-block;
-  width: 33%;
+.controls.container {
+  display: flex;
+  flex-direction: row;
+}
+.controls.container > * {
+  white-space: normal;
+  width: 25%;
   padding: 0;
   margin: 0;
 }
@@ -75,4 +79,8 @@ h5 {
   left: 0;
   background-color: #adf4ad;
   padding: 0.1em 1em;
+}
+
+input[type="button"] {
+  height: 2em;
 }
