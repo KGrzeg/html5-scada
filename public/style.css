@@ -22,7 +22,7 @@ h1 {
   background-color: #adf4ad;
   margin: 0;
   margin-bottom: 0.5em;
-  padding: 0 0.5em;
+  padding: 0.25em 0;
   text-align: center;
 }
 
@@ -33,7 +33,8 @@ h5 {
 .message {
   width: 100%;
   background-color: palegoldenrod;
-  padding: 1em 1em;
+  padding: 0.5em 1em;
+  min-height: 35.2px;
 }
 
 .status {
@@ -43,6 +44,10 @@ h5 {
 
 .plot {
   margin-bottom: 1em;
+  width: 100%;
+}
+.plot canvas {
+  width: 100% !important;
 }
 
 .dummy {

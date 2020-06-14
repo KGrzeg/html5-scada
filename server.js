@@ -45,6 +45,10 @@ const tcpServer = net.createServer((socket) => {
     console.log(`TCP Disconnected`);
   });
 
+  socket.on("data", (data) => {
+    io.sockets.emit("response", data.readDoubleBE(0));
+  });
+
   tcpConnection = socket;
 });
 

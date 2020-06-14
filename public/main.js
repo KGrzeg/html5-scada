@@ -1,4 +1,25 @@
 const messageTime = 3000;
+const chartStream = new TimeSeries();
+
+function createTimeline() {
+  const chart = new SmoothieChart({
+    grid: { fillStyle: "#adf4ad" },
+    timestampFormatter: SmoothieChart.timeFormatter,
+    maxValue: 5,
+    minValue: -5,
+    millisPerPixel: 50,
+  });
+  const canvas = document.getElementById("smoothie-chart");
+
+  chart.addTimeSeries(chartStream, {
+    lineWidth: 2,
+    strokeStyle: "#000",
+  });
+  chart.streamTo(canvas, 500);
+}
+window.addEventListener("load", () => {
+  createTimeline();
+});
 
 const app = new Vue({
   el: "#app",
@@ -7,13 +28,13 @@ const app = new Vue({
     messagesStack: [],
     controller: {
       set: {
-        u: 0,
+        W: 0,
         Kp: 1,
         Ti: 1000000,
         Td: 0,
       },
       view: {
-        u: 0,
+        W: 0,
         Kp: 1,
         Ti: 1000000,
         Td: 0,
@@ -61,9 +82,13 @@ const app = new Vue({
       this.socket.on("error", (err) => {
         this.pushMessage(`Error occured: ${err}`);
       });
+
+      this.socket.on("response", (data) => {
+        chartStream.append(new Date().getTime(), data);
+      });
     },
     submitU() {
-      this.controller.set.u = parseFloat(this.controller.view.u);
+      this.controller.set.W = parseFloat(this.controller.view.W);
       this.sendInputs();
     },
     submitPID() {
@@ -80,7 +105,7 @@ const app = new Vue({
     },
     sendInputs() {
       const inputs = [
-        this.controller.set.u,
+        this.controller.set.W,
         this.controller.set.Kp,
         this.controller.set.Ti,
         this.controller.set.Td,

@@ -20,8 +20,8 @@
     <div class="status">
       status: {{ status }}
     </div>
-    <div class="plot">
-      <div class="dummy">Live response placeholder</div>
+    <div class="plot" :style="{visibility: connected ? 'visible' : 'hidden'}">
+      <canvas id="smoothie-chart" width="300" height="125">
     </div>
     <div class="controls">
       <input type="button" :value="btnConnectTitle" @click="connect">
@@ -30,14 +30,14 @@
     </div>
     <h5>Set Inputs and terms</h5>
     <div class="controls container">
-      <label>u <input type="number" v-model="controller.view.u"></label>
+      <label>W <input type="number" v-model="controller.view.W"></label>
       <label>Kp <input type="number" v-model="controller.view.Kp"></label>
       <label>Ti <input type="number" v-model="controller.view.Ti"></label>
       <label>Td <input type="number" v-model="controller.view.Td"></label>
     </div>
     <h5>Current Values</h5>
     <div class="controls container">
-      <label>u <input type="number" v-model="controller.set.u" disabled></label>
+      <label>W <input type="number" v-model="controller.set.W" disabled></label>
       <label>Kp <input type="number" v-model="controller.set.Kp" disabled></label>
       <label>Ti <input type="number" v-model="controller.set.Ti" disabled></label>
       <label>Td <input type="number" v-model="controller.set.Td" disabled></label>
@@ -46,6 +46,7 @@
 
   <div class="footer">Autorzy: Grzegorz Kupczyk & Jarosław Bartkowski</div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothie/1.34.0/smoothie.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="main.js"></script>
