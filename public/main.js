@@ -9,14 +9,14 @@ const app = new Vue({
       set: {
         u: 0,
         Kp: 1,
-        Ts: 0,
-        Ti: 0,
+        Ti: 1000000,
+        Td: 0,
       },
       view: {
         u: 0,
         Kp: 1,
-        Ts: 0,
-        Ti: 0,
+        Ti: 1000000,
+        Td: 0,
       },
     },
     socket: null,
@@ -69,7 +69,7 @@ const app = new Vue({
     submitPID() {
       this.controller.set.Kp = parseFloat(this.controller.view.Kp);
       this.controller.set.Ti = parseFloat(this.controller.view.Ti);
-      this.controller.set.Ts = parseFloat(this.controller.view.Ts);
+      this.controller.set.Td = parseFloat(this.controller.view.Td);
       this.sendInputs();
     },
     pushMessage(text) {
@@ -83,7 +83,7 @@ const app = new Vue({
         this.controller.set.u,
         this.controller.set.Kp,
         this.controller.set.Ti,
-        this.controller.set.Ts,
+        this.controller.set.Td,
       ];
       this.socket.emit("updateInputs", inputs);
     },

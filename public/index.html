@@ -30,17 +30,17 @@
     </div>
     <h5>Set Inputs and terms</h5>
     <div class="controls container">
-      <label>u <input type="number" value="0" v-model="controller.view.u"></label>
-      <label>Kp <input type="number" value="1" v-model="controller.view.Kp"></label>
-      <label>Ti <input type="number" value="1000" v-model="controller.view.Ti"></label>
-      <label>Ts <input type="number" value="1" v-model="controller.view.Ts"></label>
+      <label>u <input type="number" v-model="controller.view.u"></label>
+      <label>Kp <input type="number" v-model="controller.view.Kp"></label>
+      <label>Ti <input type="number" v-model="controller.view.Ti"></label>
+      <label>Td <input type="number" v-model="controller.view.Td"></label>
     </div>
     <h5>Current Values</h5>
     <div class="controls container">
-      <label>u <input type="number" value="0" v-model="controller.set.u" readonly disabled></label>
-      <label>Kp <input type="number" value="1" v-model="controller.set.Kp" readonly disabled></label>
-      <label>Ti <input type="number" value="1000" v-model="controller.set.Ti" readonly disabled></label>
-      <label>Ts <input type="number" value="1" v-model="controller.set.Ts" readonly disabled></label>
+      <label>u <input type="number" v-model="controller.set.u" disabled></label>
+      <label>Kp <input type="number" v-model="controller.set.Kp" disabled></label>
+      <label>Ti <input type="number" v-model="controller.set.Ti" disabled></label>
+      <label>Td <input type="number" v-model="controller.set.Td" disabled></label>
     </div>
   </div>
 
