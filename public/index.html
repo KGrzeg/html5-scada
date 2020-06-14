@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HTML5 SCADA</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,8 +14,33 @@
   <h1>HTML5 Scada</h1>
 
   <div id="app">
-
-    {{ message }}
+    <div class="message" :style="{visibility: message ? 'visible' : 'hidden'}">
+      {{ message }}
+    </div>
+    <div class="status">
+      status: {{ status }}
+    </div>
+    <div class="plot">
+      <div class="dummy">Live response placeholder</div>
+    </div>
+    <div class="controls">
+      <input type="button" :value="btnConnectTitle" @click="connectCb">
+      <input type="button" value="Update input">
+      <input type="button" value="Update PID terms">
+    </div>
+    <h5>Set Inputs and terms</h5>
+    <div class="controls">
+      <label>u <input type="number" value="1"></label>
+    </div>
+    <div class="controls three">
+      <label>Kp <input type="number" value="1"></label><label>Ti <input type="number" value="1"></label><label>Ts <input
+          type="number" value="1"></label>
+    </div>
+    <h5>Current Values</h5>
+    <div class="controls three">
+      <label>Kp <input type="number" value="1" readonly></label><label>Ti <input type="number" value="1"
+          readonly></label><label>Ts <input type="number" value="1" readonly></label>
+    </div>
 
   </div>
 
