@@ -6,6 +6,8 @@ const http = require("http");
 const socketio = require("socket.io");
 
 const app = express();
+
+const ip = process.env.ADDRESS || "localhost";
 const webPort = 3000;
 const tcpPort = 2137;
 
@@ -52,8 +54,8 @@ const tcpServer = net.createServer((socket) => {
   tcpConnection = socket;
 });
 
-server.listen(webPort, () =>
-  console.log(`Web server running at http://localhost:${webPort}`)
+server.listen(webPort, ip, () =>
+  console.log(`Web server running at http://${ip}:${webPort}`)
 );
-tcpServer.listen(tcpPort);
-console.log(`TCP listen on 127.0.0.1:${tcpPort}`);
+tcpServer.listen(tcpPort, ip);
+console.log(`TCP listen on ${ip}:${tcpPort}`);
