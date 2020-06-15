@@ -14,6 +14,12 @@ body {
   height: 100%;
 }
 
+a,
+a:visited {
+  color: green;
+  text-decoration: none;
+}
+
 #app {
   width: 100%;
   padding: 0 0.5em;
